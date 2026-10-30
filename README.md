@@ -2,13 +2,26 @@
 
 Wolfram Mathematica code for the paper
 
-> W. Ahmad and P. Gao, *Interconnection losses and robust design of all-back-contact perovskite/silicon tandem solar cells*, submitted to EES Solar.
+> W. Ahmad and P. Gao, *Interconnection losses and robust design of all-back-contact perovskite/silicon tandem solar cells*.
 
 The code models an all-back-contact (ABC) perovskite/silicon tandem: a quasi-interdigitated back-contact (QIBC) perovskite top cell (1.62 eV, CsFAMA) on a heterojunction interdigitated back-contact (HIBC) silicon bottom cell under AM1.5G. It then compares four ways of wiring the subcells:
 - two-terminal series (2T);
 - voltage-matched module (VMM);
 - three-terminal (3T, loading strategies L1–L4);
 - four-terminal (4T).
+
+## Origin of the code
+
+This code extends the open-source perovskite/silicon tandem model of M. H. Futscher and B. Ehrler, [Tandem-Solar-Cell-Model](https://github.com/HybridSolarCells/Tandem-Solar-Cell-Model) (`RealisticTandem.nb`, copyright 2017, GPL-3.0). That model is described in:
+
+> M. H. Futscher and B. Ehrler, Modeling the performance limitations and prospects of perovskite/Si tandem solar cells under realistic operating conditions, *ACS Energy Lett.*, 2017, **2**, 2089–2095, [DOI: 10.1021/acsenergylett.7b00596](https://doi.org/10.1021/acsenergylett.7b00596).
+
+The detailed-balance subcell models, the optical coupling and the 2T, VMM and 4T circuits come from that work. The changes made here (2026, W. Ahmad) are:
+- the silicon and perovskite subcells were replaced by the HIBC silicon cell and the TCAD-optimized QIBC perovskite cell listed under *Input data*;
+- a three-terminal (3T) tandem model and the export of J–V curves and performance tables were added to the notebook;
+- the scripts in `analysis/` were added for the wiring analysis of the paper.
+
+The original copyright and license notices are kept at the top of the notebook. If you use this code, please also cite the paper of Futscher and Ehrler.
 
 ## Contents
 
@@ -19,16 +32,13 @@ The code models an all-back-contact (ABC) perovskite/silicon tandem: a quasi-int
 | `analysis/extract_cells.wls` | Copies the Input cells of the notebook to `analysis/cells.wl`. You only need it after editing the notebook. |
 | `analysis/run_model.wls` | Runs `cells.wl` without the front end and saves the model state to `model_state.mx`. |
 | `analysis/wiring_analysis.wls` | Wiring analysis of the paper: connection and constraint losses, resistance sweeps, the shared-contact resistance of 3T, voltage-matching ratio sweeps, sensitivity to the operating conditions, the 27 combined conditions and the design windows. Writes `analysis/Results/`. |
-| `analysis/make_figures.py` | Draws Figs. 3–11 of the paper from `analysis/Results/` into `analysis/Figures/`. |
 | `analysis/summarize.py` | Robustness metrics and design-window limits (`Results/chapter_summary.json`). |
 | `analysis/Results/` | The results used in the paper, as CSV and JSON files. |
-
-Figs. 1 and 2 of the paper are schematics and are not produced by the code.
 
 ## Requirements
 
 - Wolfram Mathematica (tested with 14.3; `wolframscript` for the headless scripts)
-- Python 3 with NumPy and Matplotlib, for the figures only (tested with Python 3.13, NumPy 2.3, Matplotlib 3.10). The figures use the Times New Roman font.
+- Python 3 with NumPy, for `summarize.py` only
 
 ## How to run
 
@@ -39,25 +49,10 @@ Figs. 1 and 2 of the paper are schematics and are not produced by the code.
 ```bash
 wolframscript -file run_model.wls        # subcell and tandem models, about 1.5 min
 wolframscript -file wiring_analysis.wls  # wiring analysis, 4-7 min
-python make_figures.py                   # Figs. 3-11
 python summarize.py                      # robustness summary
 ```
 
-`wiring_analysis.wls` also checks its circuit calculations against the notebook's own tandem routines and writes the comparison to `Results/verification.csv` (Table S3 of the ESI).
-
-## Figures of the paper
-
-| Paper | File written by `make_figures.py` |
-|---|---|
-| Fig. 3 | `Fig3_reference_JV.png` |
-| Fig. 4 | `Fig4_loss_decomposition.png` |
-| Fig. 5 | `Fig5_resistance_sweeps.png` |
-| Fig. 6 | `Fig6_3T_shared_contact.png` |
-| Fig. 7 | `Fig7_ratio_sweeps.png` |
-| Fig. 8 | `Fig8_sensitivity_constraint_loss.png` |
-| Fig. 9 | `Fig9_sensitivity_nominal_R.png` |
-| Fig. 10 | `Fig10_factorial_robustness.png` |
-| Fig. 11 | `Fig11_design_windows.png` |
+`wiring_analysis.wls` also checks its circuit calculations against the notebook's own tandem routines and writes the comparison to `Results/verification.csv`.
 
 ## Input data
 
@@ -69,8 +64,12 @@ python summarize.py                      # robustness summary
 
 ## Citation
 
-If you use this code, please cite the paper above. The reference will be updated here once the paper is published.
+If you use this code, please cite the paper above and the paper of Futscher and Ehrler. The reference to our paper will be completed here once it is published.
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Data taken from the publications listed under *Input data* remain subject to the terms of their sources.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. As a modified version of a GPL-3.0 program, it is distributed under the same license. See [LICENSE](LICENSE).
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+Data taken from the publications listed under *Input data* remain subject to the terms of their sources.

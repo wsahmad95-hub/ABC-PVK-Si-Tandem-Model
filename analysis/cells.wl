@@ -1,4 +1,6 @@
 (* ===== CELL 1 ===== *)
+(* Input cells of ABC-PVK-Si_Tandem_Model.nb, a modified version of RealisticTandem.nb
+   (Copyright 2017 M. H. Futscher and B. Ehrler; modified 2026 by W. Ahmad). GPL-3.0-or-later, see LICENSE. *)
 c = 299792458.; (* units: m / s *)
 h = 6.6260695729*10^-34; (* units: J s - Planck's Constant *)
 h2 = 4.136 10^-15; (* units: eV s - Planck's Constant *)
