@@ -4,7 +4,7 @@ Wolfram Mathematica code for the paper
 
 > W. Ahmad and P. Gao, *Interconnection losses and robust design of all-back-contact perovskite/silicon tandem solar cells*.
 
-The code models an all-back-contact (ABC) perovskite/silicon tandem: a quasi-interdigitated back-contact (QIBC) perovskite top cell (1.62 eV, CsFAMA) on a heterojunction interdigitated back-contact (HIBC) silicon bottom cell under AM1.5G. It then compares four ways of wiring the subcells:
+The code models an all-back-contact (ABC) perovskite/silicon tandem: a quasi-interdigitated back-contact (QIBC) perovskite top cell (1.62 eV, CsFAMA) on a hybrid interdigitated back-contact (HIBC) silicon bottom cell under AM1.5G. It then compares four ways of wiring the subcells:
 - two-terminal series (2T);
 - voltage-matched module (VMM);
 - three-terminal (3T, loading strategies L1–L4);
@@ -59,7 +59,7 @@ python summarize.py                      # robustness summary
 | File | Content | Source |
 |---|---|---|
 | `astmg173.xls` | AM1.5G reference spectrum | ASTM G173-03(2012) |
-| `IV-HTIBC-Si.csv`, `EQE-HTIBC-Si.csv` | J–V and EQE of the 27.4% HIBC silicon cell | G. Wang et al., *Nature*, 2025, **647**, 369–374 |
+| `IV-HTIBC-Si.csv`, `EQE-HTIBC-Si.csv` | J–V and EQE of the HIBC silicon cell (27.81% PCE) | G. Wang et al., *Nature*, 2025, **647**, 369–374 |
 | `JV-Ideal-1.62.csv`, `EQE-ideal-1.62.csv` | J–V and EQE of the TCAD-optimized QIBC perovskite top cell | W. Ahmad and P. Gao, *Chem. Eng. J.*, 2025, **526**, 171437; the device follows X. Lin et al., *Adv. Energy Mater.*, 2021, **11**, 2100053 |
 
 ## Citation
